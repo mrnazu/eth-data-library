@@ -1,0 +1,25 @@
+{
+  "name": "eth-data-library",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/**/*.test.js",
+    "lint": "eslint src/**/*.js",
+    "docs:build": "npm run docs:generate && cp -r docs/build/* public/"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.4.0"
+  },
+  "dependencies": {
+    "assert": "^2.1.0",
+    "lodash": "^4.17.21"
+  }
+}
