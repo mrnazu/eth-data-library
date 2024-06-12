@@ -1,6 +1,7 @@
 {
   "name": "eth-data-library",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": ".eslintrc.js",
   "directories": {
@@ -20,6 +21,8 @@
   },
   "dependencies": {
     "assert": "^2.1.0",
-    "lodash": "^4.17.21"
+    "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
+    "web3": "^4.9.0"
   }
 }
