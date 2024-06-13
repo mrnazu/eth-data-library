@@ -1,5 +1,7 @@
+// utils.test.js
+
 const assert = require('assert');
-const { filterByProperty, sortByProperty, transformData } = require('../src/common/utils');
+const { filterByProperty } = require('../src/common/utils');
 
 describe('utils.js tests', () => {
   it('filterByProperty should filter objects based on property and value', () => {

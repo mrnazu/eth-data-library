@@ -1,9 +1,9 @@
 {
   "name": "eth-data-library",
   "version": "1.0.0",
-  "type": "module",
-  "description": "",
-  "main": ".eslintrc.js",
+  "type": "commonjs",
+  "description": " eth-data-library is a Nodejs library that provides tools for accessing and processing data on the Ethereum blockchain.",
+  "main": "index.js",
   "directories": {
     "doc": "docs",
     "test": "test"
@@ -13,8 +13,12 @@
     "lint": "eslint src/**/*.js",
     "docs:build": "npm run docs:generate && cp -r docs/build/* public/"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "nodejs",
+    "eth",
+    "npm"
+  ],
+  "author": "Samuel",
   "license": "ISC",
   "devDependencies": {
     "mocha": "^10.4.0"
@@ -23,6 +27,6 @@
     "assert": "^2.1.0",
     "dotenv": "^16.4.5",
     "lodash": "^4.17.21",
-    "web3": "^4.9.0"
+    "web3": "^1.10.4"
   }
 }

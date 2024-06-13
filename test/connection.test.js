@@ -1,17 +1,24 @@
-const assert = require('assert');
-require("dotenv").config();
+// connection.test.js
 
+const assert = require('assert');
 const EthereumConnection = require('../src/blockchains/ethereum/connection');
-const config = require('../config/config')({ ethereumUrl:  process.env.ETHEREUM_NODE_URL});
+const getConfig = require('../config/config');
+
+const config = getConfig();
 
 describe('Ethereum Connection', () => {
-  it('should connect to the Ethereum node', (done) => {
+  it('should connect to the Ethereum node', function(done) { // this use function(done) syntax to access `this.timeout`
+    this.timeout(5000); // Increase timeout to 5000ms
+
     const connection = new EthereumConnection(config.ethereum);
+
     connection.connect()
-      .then(() => {
+      .then((connected) => {
+        assert.strictEqual(connected, true, 'Expected connection to be successful');
         done();  // Signal successful test
       })
       .catch((error) => {
+        console.error('Error during connection test:', error);
         assert.fail(error);  // Fail the test if there's an error
         done();  // Still call done() to signal test completion
       });
