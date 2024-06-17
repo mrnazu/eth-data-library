@@ -1,22 +1,38 @@
 // src/blockchains/ethereum/queries.js
 
 const Web3 = require('web3');
-const { ethereumNodeURL } = require('../../../config/config');
-const defaultWeb3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+const { getConfig } = require('../../../config/config');
 
+let defaultWeb3;
 
-async function getBalance(address, web3 = defaultWeb3) {
+async function getDefaultWeb3() {
+  if (!defaultWeb3) {
+    const config = getConfig();
+    defaultWeb3 = new Web3(new Web3.providers.HttpProvider(config.ethereum.url));
+    try {
+      await defaultWeb3.eth.net.isListening();
+      console.log('Connected to Ethereum node at:', config.ethereum.url);
+    } catch (error) {
+      console.error('Failed to connect to Ethereum node at:', config.ethereum.url);
+      throw error;
+    }
+  }
+  return defaultWeb3;
+}
+
+async function getBalance(address, web3) {
+  web3 = web3 || await getDefaultWeb3();
   try {
     const balance = await web3.eth.getBalance(address);
     return balance.toString(); // Convert balance to string (wei)
   } catch (error) {
     console.error('Error retrieving balance:', error);
-    throw error; // Re-throw the error to handle it upstream
+    throw error;
   }
 }
 
-
-async function getTransactions(address, fromBlock, toBlock, web3 = defaultWeb3) {
+async function getTransactions(address, fromBlock, toBlock, web3) {
+  web3 = web3 || await getDefaultWeb3();
   try {
     const logs = await web3.eth.getPastLogs({
       fromBlock,
@@ -33,7 +49,7 @@ async function getTransactions(address, fromBlock, toBlock, web3 = defaultWeb3) 
     return transactions;
   } catch (error) {
     console.error('Error fetching transactions:', error);
-    throw error; // Re-throw the error to handle it upstream
+    throw error;
   }
 }
 

@@ -1,11 +1,11 @@
-// connection.js
+// src/blockchains/ethereum/connection.js
 
 const Web3 = require('web3');
 
 class EthereumConnection {
-  constructor(config) {
-    this.url = config.url;
-    this.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+  constructor(url) {
+    this.url = url;
+    this.web3 = new Web3(new Web3.providers.HttpProvider(url));
   }
 
   async connect() {

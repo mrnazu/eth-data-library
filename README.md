@@ -35,6 +35,7 @@ Create a `.env` file in the root directory of your project and add your Ethereum
 ```
 ETHEREUM_NODE_URL=http://127.0.0.1:7545
 ```
+To get started, copy the provided `env-copy` file and rename it to `.env`, then add your Ethereum node URL.
 
 ## Usage
 ### Connecting to Ethereum Node
@@ -42,6 +43,7 @@ To connect to an Ethereum node:
 
 ```javascript
 const { connectToEthereumNode } = require('eth-data-library');
+
 const nodeUrl = 'http://127.0.0.1:7545'; // Replace with your Ethereum node URL
 
 async function main() {
@@ -64,7 +66,7 @@ Retrieve the balance of an Ethereum address:
 const { getBalance } = require('eth-data-library');
 
 async function main() {
-  const address = '0x1234567890AbCdEf1234567890AbCdEf12345678';
+  const address = '0x1234567890AbCdEf1234567890AbCdEf12345678'; // Replace with your node address
   try {
     const balance = await getBalance(address);
     console.log(`Balance of ${address}: ${balance} wei`);
@@ -83,7 +85,7 @@ Fetch transactions for an address within a block range:
 const { getTransactions } = require('eth-data-library');
 
 async function main() {
-  const address = '0x1234567890AbCdEf1234567890AbCdEf12345678';
+  const address = '0x1234567890AbCdEf1234567890AbCdEf12345678'; // Replace with your node address
   const fromBlock = 0;
   const toBlock = 'latest';
   try {
