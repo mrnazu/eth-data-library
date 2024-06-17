@@ -2,7 +2,7 @@
 
 const Web3 = require('web3');
 const { ethereumNodeURL } = require('../../../config/config');
-const defaultWeb3 = new Web3(new Web3.providers.HttpProvider(ethereumNodeURL));
+const defaultWeb3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 
 
 async function getBalance(address, web3 = defaultWeb3) {

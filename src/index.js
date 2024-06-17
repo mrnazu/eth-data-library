@@ -16,7 +16,7 @@ async function main() {
     console.log("Successfully connected to Ethereum node");
 
     // Example usage of getBalance and getTransactions
-    const address = '0x1234567890AbCdEf1234567890AbCdEf12345678';
+    const address = '0x93e3cDa8cCe57CfbD8f92223Ee6D4Bc241Ae069E';
     const balance = await getBalance(address);
     console.log(`Balance of ${address}: ${balance} wei`);
 
