@@ -1,4 +1,4 @@
-// connection.test.js
+// test/connection.test.js
 
 const assert = require('assert');
 const EthereumConnection = require('../src/blockchains/ethereum/connection');
@@ -7,7 +7,7 @@ const getConfig = require('../config/config');
 const config = getConfig();
 
 describe('Ethereum Connection', () => {
-  it('should connect to the Ethereum node', function(done) { // this use function(done) syntax to access `this.timeout`
+  it('should connect to the Ethereum node', function(done) {
     this.timeout(5000); // Increase timeout to 5000ms
 
     const connection = new EthereumConnection(config.ethereum);

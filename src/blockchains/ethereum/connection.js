@@ -3,9 +3,13 @@
 const Web3 = require('web3');
 
 class EthereumConnection {
-  constructor(url) {
+  constructor({ url }) {
+    if (!url) {
+      throw new Error('Invalid config object: ethereum.url is required');
+    }
+
     this.url = url;
-    this.web3 = new Web3(new Web3.providers.HttpProvider(url));
+    this.web3 = new Web3(new Web3.providers.HttpProvider(this.url));
   }
 
   async connect() {
