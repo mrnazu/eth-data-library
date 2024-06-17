@@ -1,6 +1,6 @@
 {
   "name": "eth-data-library",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "commonjs",
   "description": " eth-data-library is a Nodejs library that provides tools for accessing and processing data on the Ethereum blockchain.",
   "repository": {
