@@ -1,6 +1,0 @@
-language: node_js
-node_js:
-  - 16  # Test against a recent Node.js version
-script:
-  - npm install  # Install dependencies
-  - npm test     # Run tests
