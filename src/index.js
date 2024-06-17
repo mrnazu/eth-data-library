@@ -1,19 +1,30 @@
 // index.js
 
-require("dotenv").config();
-
 const EthereumConnection = require("./blockchains/ethereum/connection");
-const config = require("../config/config")({
-  ethereumUrl: process.env.ETHEREUM_NODE_URL,
-});
+const { getBalance, getTransactions } = require("./blockchains/ethereum/queries");
+const getConfig = require("../config/config");
 
-const connection = new EthereumConnection(config.ethereum);
+const config = getConfig();
 
-connection
-  .connect()
-  .then(() => {
+// Log the configuration to ensure it's loaded correctly
+console.log('Config:', config);
+
+async function main() {
+  try {
+    const connection = new EthereumConnection(config.ethereum.url);
+    await connection.connect();
     console.log("Successfully connected to Ethereum node");
-  })
-  .catch((error) => {
-    console.error("Error connecting:", error);
-});
+
+    // Example usage of getBalance and getTransactions
+    const address = '0x1234567890AbCdEf1234567890AbCdEf12345678';
+    const balance = await getBalance(address);
+    console.log(`Balance of ${address}: ${balance} wei`);
+
+    const transactions = await getTransactions(address, 0, 'latest');
+    console.log(`Transactions for ${address}:`, transactions);
+  } catch (error) {
+    console.error("Error connecting or querying data:", error);
+  }
+}
+
+main();

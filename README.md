@@ -28,6 +28,14 @@ Or using yarn:
 yarn add eth-data-library
 ```
 
+### Set Up Environment Variables
+
+Create a `.env` file in the root directory of your project and add your Ethereum node URL:
+
+```
+ETHEREUM_NODE_URL=http://127.0.0.1:7545
+```
+
 ## Usage
 ### Connecting to Ethereum Node
 To connect to an Ethereum node:
