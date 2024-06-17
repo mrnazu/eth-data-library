@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "type": "commonjs",
   "description": " eth-data-library is a Nodejs library that provides tools for accessing and processing data on the Ethereum blockchain.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrnazu/eth-data-library.git"
+  },
   "main": "index.js",
   "directories": {
     "doc": "docs",
@@ -11,12 +15,19 @@
   "scripts": {
     "test": "mocha test/**/*.test.js",
     "lint": "eslint src/**/*.js",
+    "prepublishOnly": "npm run test",
     "docs:build": "npm run docs:generate && cp -r docs/build/* public/"
   },
   "keywords": [
     "nodejs",
     "eth",
-    "npm"
+    "npm",
+    "ethereum",
+    "blockchain",
+    "web3",
+    "data",
+    "nazu",
+    "dapp"
   ],
   "author": "Samuel",
   "license": "ISC",
