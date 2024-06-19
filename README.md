@@ -42,13 +42,14 @@ To get started, copy the provided `env-copy` file and rename it to `.env`, then 
 To connect to an Ethereum node:
 
 ```javascript
-const { connectToEthereumNode } = require('eth-data-library');
+const { EthereumConnection } = require('eth-data-library');
 
 const nodeUrl = 'http://127.0.0.1:7545'; // Replace with your Ethereum node URL
 
 async function main() {
   try {
-    await connectToEthereumNode(nodeUrl);
+    const connection = new EthereumConnection({ url: nodeUrl });
+    await connection.connect();
     console.log('Connected to Ethereum node successfully!');
   } catch (error) {
     console.error('Failed to connect to Ethereum node:', error);

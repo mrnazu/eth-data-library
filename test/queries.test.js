@@ -1,7 +1,7 @@
-// test/queries.test.js
+// queries.test.js
 
 const sinon = require('sinon');
-const { getBalance, getTransactions } = require('../src/blockchains/ethereum/queries');
+const { getBalance, getTransactions } = require('../src/queries');
 const Web3 = require('web3');
 
 (async () => {

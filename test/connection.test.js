@@ -1,7 +1,7 @@
-// test/connection.test.js
+// connection.test.js
 
 const assert = require('assert');
-const EthereumConnection = require('../src/blockchains/ethereum/connection');
+const EthereumConnection = require('../src/connection');
 const getConfig = require('../config/config');
 
 const config = getConfig();
