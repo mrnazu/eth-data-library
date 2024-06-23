@@ -7,7 +7,7 @@ const {
   transformData,
 } = require("./common/utils");
 const { set, get } = require("./common/cache");
-const { logInfo, logError } = require("./logger");
+const { logInfo, logWarning, logError } = require('./logger');
 
 // Export EthereumConnection class
 module.exports.EthereumConnection = EthereumConnection;
@@ -62,7 +62,7 @@ module.exports.getTransactions = async function getTransactions(
     } else {
       errorMessage = `Failed to get transactions: ${error.message}\n`;
     }
-    
+
     logError(`Failed to get transactions for ${address}: ${error.message}`);
     throw new Error(errorMessage);
   }
