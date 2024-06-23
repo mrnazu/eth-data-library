@@ -2,8 +2,8 @@
 
 const { getBalance } = require('../src/index');
 
-const address = '0xe9C1B07ACbBe047d46305818f402d46daBEc0eDc';
-const nodeUrl = 'http://127.0.0.1:7545'; // Replace with your actual node URL
+const address = '0xc14E69957fE431c7b43b87823D8092220AC2d6e8';
+const nodeUrl = 'http://172.28.240.1:7546'; // Replace with your actual node URL
 
 getBalance(address, nodeUrl)
     .then(balance => console.log(`Balance of ${address}: ${balance} wei`))
