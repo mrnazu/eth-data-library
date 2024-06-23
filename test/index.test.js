@@ -1,3 +1,5 @@
+// test/index.test.js
+
 const assert = require("assert");
 const {
   EthereumConnection,
@@ -9,7 +11,7 @@ const {
   set,
   get,
 } = require("../src/index");
-const getConfig = require("../config/config");
+const { getConfig } = require("../config/config");
 
 describe("index", () => {
   it("should import necessary modules", () => {
@@ -24,8 +26,9 @@ describe("index", () => {
   });
 
   it("should load configuration correctly", () => {
-    const config = getConfig();
-    assert(config instanceof Object);
+    const config = getConfig(); // Call getConfig to get the configuration object
+    assert(config instanceof Object); // Assert that config is an object
+    assert(config.ethereum.url); // Assert that ethereum.url is defined in the config
   });
 
   let logCount = 0;
@@ -37,7 +40,7 @@ describe("index", () => {
   };
 
   it("should log configuration correctly", () => {
-    getConfig();
-    assert.equal(logCount, 2);
+    getConfig(); // Call getConfig to trigger logging
+    assert.equal(logCount, 2); // Assert that logCount is 2 after calling getConfig
   });
 });

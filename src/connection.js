@@ -3,12 +3,11 @@
 const Web3 = require('web3');
 
 class EthereumConnection {
-  constructor({ url }) {
-    if (!url) {
+  constructor(config) {
+    if (!config || !config.ethereum || !config.ethereum.url) {
       throw new Error('Invalid config object: ethereum.url is required');
     }
-
-    this.url = url;
+    this.url = config.ethereum.url;
     this.web3 = new Web3(new Web3.providers.HttpProvider(this.url));
   }
 
@@ -22,6 +21,10 @@ class EthereumConnection {
       console.error('Error connecting to Ethereum node:', error);
       throw error;
     }
+  }
+
+  async disconnect() {
+    // Implement disconnect logic if necessary
   }
 }
 

@@ -1,26 +1,27 @@
-// connection.test.js
+// src/connection.js
 
-const assert = require('assert');
-const EthereumConnection = require('../src/connection');
-const getConfig = require('../config/config');
+const Web3 = require('web3');
 
-const config = getConfig();
+class EthereumConnection {
+    constructor(config) {
+        if (!config || !config.ethereum || !config.ethereum.url) {
+            throw new Error('Invalid config object: ethereum.url is required');
+        }
+        this.url = config.ethereum.url;
+        this.web3 = new Web3(new Web3.providers.HttpProvider(this.url));
+    }
 
-describe('Ethereum Connection', () => {
-  it('should connect to the Ethereum node', function(done) {
-    this.timeout(5000); // Increase timeout to 5000ms
+    async connect() {
+        try {
+            console.log('Attempting to connect to Ethereum node at:', this.url);
+            await this.web3.eth.net.isListening();
+            console.log('Connected to Ethereum node!');
+            return true;
+        } catch (error) {
+            console.error('Error connecting to Ethereum node:', error);
+            throw error;
+        }
+    }
+}
 
-    const connection = new EthereumConnection(config.ethereum);
-
-    connection.connect()
-      .then((connected) => {
-        assert.strictEqual(connected, true, 'Expected connection to be successful');
-        done();  // Signal successful test
-      })
-      .catch((error) => {
-        console.error('Error during connection test:', error);
-        assert.fail(error);  // Fail the test if there's an error
-        done();  // Still call done() to signal test completion
-      });
-  });
-});
+module.exports = EthereumConnection;

@@ -21,7 +21,6 @@ async function getDefaultWeb3() {
 }
 
 async function getBalance(address, web3) {
-  web3 = web3 || await getDefaultWeb3();
   try {
     const balance = await web3.eth.getBalance(address);
     return balance.toString(); // Convert balance to string (wei)
@@ -30,6 +29,7 @@ async function getBalance(address, web3) {
     throw error;
   }
 }
+
 
 async function getTransactions(address, fromBlock, toBlock, web3) {
   web3 = web3 || await getDefaultWeb3();
