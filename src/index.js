@@ -7,16 +7,24 @@ const {
   transformData,
 } = require("./common/utils");
 const { set, get } = require("./common/cache");
+const { logInfo, logError } = require("./logger");
 
 // Export EthereumConnection class
 module.exports.EthereumConnection = EthereumConnection;
 
 // Export functions with parameters
 module.exports.getBalance = async (address, nodeUrl) => {
-  const connection = new EthereumConnection({ ethereum: { url: nodeUrl } });
-  await connection.connect();
-  const web3 = connection.web3; // Access the web3 instance from the connection
-  return getBalanceFunc(address, web3); // Pass web3 instead of connection
+  try {
+    const connection = new EthereumConnection({ ethereum: { url: nodeUrl } });
+    await connection.connect();
+    const web3 = connection.web3;
+    const balance = await getBalanceFunc(address, web3);
+    logInfo(`Retrieved balance for ${address}: ${balance}`);
+    return balance;
+  } catch (error) {
+    logError(`Failed to retrieve balance for ${address}: ${error.message}`);
+    throw error;
+  }
 };
 
 module.exports.getTransactions = async function getTransactions(
@@ -44,6 +52,7 @@ module.exports.getTransactions = async function getTransactions(
       fromBlock: fromBlock,
       toBlock: toBlock,
     });
+    logInfo(`Retrieved ${transactions.length} transactions for ${address}`);
     return transactions;
   } catch (error) {
     let errorMessage = "";
@@ -53,7 +62,8 @@ module.exports.getTransactions = async function getTransactions(
     } else {
       errorMessage = `Failed to get transactions: ${error.message}\n`;
     }
-
+    
+    logError(`Failed to get transactions for ${address}: ${error.message}`);
     throw new Error(errorMessage);
   }
 };
