@@ -1,129 +1,51 @@
 # eth-data-library
-## Table of Contents
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Connecting to Ethereum Node](#connecting-to-ethereum-node)
-  - [Querying Data](#querying-data)
-  - [Processing Results](#processing-results)
-- [API Reference](#api-reference)
-  - [getBalance(address)](#getbalanceaddress)
-  - [getTransactions(address, fromBlock, toBlock)](#gettransactionsaddress-fromblock-toblock)
-- [Contributing](#contributing)
-- [License](#license)
 
-## Introduction
-`eth-data-library` is a Node.js library designed for interacting with Ethereum blockchain data. It provides functions to connect to an Ethereum node, retrieve account balances, fetch transactions, and process blockchain data efficiently.
+The Ethereum Data Library is a JavaScript library designed to simplify interaction with Ethereum blockchain data. Whether you're fetching transactions, querying balances, transforming data, or caching results for efficiency, this library provides robust tools to streamline your Ethereum development workflow.
+
+## Features
+
+- **Transaction Handling**: Retrieve transaction data from the Ethereum blockchain.
+- **Balance Queries**: Easily fetch Ethereum account balances using node URLs.
+- **Data Transformation**: Flexible data transformation capabilities to modify Ethereum data structures.
+- **Sorting and Filtering**: Sort and filter Ethereum data arrays based on specific properties.
+- **Caching**: Built-in caching mechanisms to store and retrieve data for improved performance.
 
 ## Installation
-Install `eth-data-library` using npm:
+
+To use the Ethereum Data Library in your project, install it via npm:
 
 ```bash
 npm install eth-data-library
 ```
 
-Or using yarn:
-
-```bash
-yarn add eth-data-library
-```
-
-### Set Up Environment Variables
-
-Create a `.env` file in the root directory of your project and add your Ethereum node URL:
-
-```
-ETHEREUM_NODE_URL=http://127.0.0.1:7545
-```
-To get started, copy the provided `env-copy` file and rename it to `.env`, then add your Ethereum node URL.
-
 ## Usage
-### Connecting to Ethereum Node
-To connect to an Ethereum node:
 
-```javascript
-const { EthereumConnection } = require('eth-data-library');
+### Example Usage
 
-const nodeUrl = 'http://127.0.0.1:7545'; // Replace with your Ethereum node URL
+Explore the provided examples to see how you can integrate the Ethereum Data Library into your applications:
 
-async function main() {
-  try {
-    const connection = new EthereumConnection({ url: nodeUrl });
-    await connection.connect();
-    console.log('Connected to Ethereum node successfully!');
-  } catch (error) {
-    console.error('Failed to connect to Ethereum node:', error);
-  }
-}
+- [Transform Data Example](example/transform-data-test.js)
+- [Sort by Property Example](example/sort-by-property-test.js)
+- [Get Transactions Example](example/get-transactions-query.js)
+- [Get Balance Example](example/get-balance-query.js)
+- [Filter by Property Example](example/filter-by-property-test.js)
+- [Connection and Queries Example](examples/connection-and-queries.js)
+- [Connect with User Node Example](example/connect-with-user-node.js)
+- [Cache Operations Example](example/cache-tests.js)
+- [Cache Set and Get Example](example/cache-set-get-test.js)
 
-main();
-```
+## Documentation
 
-### Querying Data
-#### getBalance(address)
-Retrieve the balance of an Ethereum address:
-
-```javascript
-const { getBalance } = require('eth-data-library');
-
-async function main() {
-  const address = '0x1234567890AbCdEf1234567890AbCdEf12345678'; // Replace with your node address
-  try {
-    const balance = await getBalance(address);
-    console.log(`Balance of ${address}: ${balance} wei`);
-  } catch (error) {
-    console.error('Error retrieving balance:', error);
-  }
-}
-
-main();
-```
-
-#### getTransactions(address, fromBlock, toBlock)
-Fetch transactions for an address within a block range:
-
-```javascript
-const { getTransactions } = require('eth-data-library');
-
-async function main() {
-  const address = '0x1234567890AbCdEf1234567890AbCdEf12345678'; // Replace with your node address
-  const fromBlock = 0;
-  const toBlock = 'latest';
-  try {
-    const transactions = await getTransactions(address, fromBlock, toBlock);
-    console.log(`Transactions for ${address}:`, transactions);
-  } catch (error) {
-    console.error('Error fetching transactions:', error);
-  }
-}
-
-main();
-```
-
-### Processing Results
-You can process and manipulate the retrieved data as per your requirements using JavaScript functions and libraries.
-
-## API Reference
-### getBalance(address)
-- **Parameters:**
-  - `address` (string): Ethereum address for which to retrieve the balance.
-- **Returns:**
-  - `Promise<string>`: Promise that resolves to the balance in wei as a string.
-
-### getTransactions(address, fromBlock, toBlock)
-- **Parameters:**
-  - `address` (string): Ethereum address for which to fetch transactions.
-  - `fromBlock` (number): Starting block number (inclusive).
-  - `toBlock` (number or string): Ending block number (inclusive) or `'latest'`.
-- **Returns:**
-  - `Promise<Object[]>`: Promise that resolves to an array of transactions.
+For detailed documentation, including API reference and additional examples, please refer to the [doc/README.md](doc/README.md) file.
 
 ## Contributing
-Contributions are welcome! If you'd like to contribute to `eth-data-library`, please follow these steps:
-1. Fork the repository and clone it locally.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and test thoroughly.
-4. Submit a pull request detailing your changes and their benefits.
+
+Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines.
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+This project is licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for details.
+
+## Get Started
+
+To get started using the Ethereum Data Library, check out the examples provided and begin integrating blockchain data capabilities into your JavaScript applications effortlessly.
