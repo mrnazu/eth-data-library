@@ -1,8 +1,12 @@
-const Web3 = require('web3');
-const EthereumConnection = require('./connection');
-const { getBalance: getBalanceFunc } = require('./queries');
-const { filterByProperty, sortByProperty, transformData } = require('./common/utils');
-const { set, get } = require('./common/cache');
+const Web3 = require("web3");
+const EthereumConnection = require("./connection");
+const { getBalance: getBalanceFunc } = require("./queries");
+const {
+  filterByProperty,
+  sortByProperty,
+  transformData,
+} = require("./common/utils");
+const { set, get } = require("./common/cache");
 
 // Export EthereumConnection class
 module.exports.EthereumConnection = EthereumConnection;
@@ -15,27 +19,42 @@ module.exports.getBalance = async (address, nodeUrl) => {
   return getBalanceFunc(address, web3); // Pass web3 instead of connection
 };
 
-module.exports.getTransactions = async function getTransactions(address, fromBlock, toBlock, nodeUrl) {
+module.exports.getTransactions = async function getTransactions(
+  address,
+  fromBlock,
+  toBlock,
+  nodeUrl
+) {
   let web3;
-  if (nodeUrl.startsWith('https')) {
+  if (nodeUrl.startsWith("https")) {
     web3 = new Web3(new Web3.providers.HttpProvider(nodeUrl));
-  } else if (nodeUrl.startsWith('http')) {
+  } else if (nodeUrl.startsWith("http")) {
     web3 = new Web3(new Web3.providers.HttpProvider(nodeUrl));
-  } else if (nodeUrl.startsWith('wss')) {
+  } else if (nodeUrl.startsWith("wss")) {
     web3 = new Web3(new Web3.providers.WebsocketProvider(nodeUrl));
   } else {
-    throw new Error(`Unsupported nodeUrl protocol. Must start with "https", "http", or "wss".`);
+    throw new Error(
+      `Unsupported nodeUrl protocol. Must start with "https", "http", or "wss".`
+    );
   }
 
   try {
-      const transactions = await web3.eth.getPastLogs({
-          address: address,
-          fromBlock: fromBlock,
-          toBlock: toBlock
-      });
-      return transactions;
+    const transactions = await web3.eth.getPastLogs({
+      address: address,
+      fromBlock: fromBlock,
+      toBlock: toBlock,
+    });
+    return transactions;
   } catch (error) {
-      throw new Error(`Failed to get transactions: ${error.message}`);
+    let errorMessage = "";
+
+    if (error.code === "ENOTFOUND" || error.code === "ECONNREFUSED") {
+      errorMessage = `CONNECTION ERROR: Couldn't connect to node ${nodeUrl}.`;
+    } else {
+      errorMessage = `Failed to get transactions: ${error.message}\n`;
+    }
+
+    throw new Error(errorMessage);
   }
 };
 
